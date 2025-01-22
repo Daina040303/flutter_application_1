@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/UseCouponPage.dart';
 
 class CouponDetail extends StatelessWidget {
 
   Function closeAction;
   CouponDetail(this.closeAction);
+
 
   @override
   Widget build(BuildContext context) {
@@ -23,13 +25,13 @@ class CouponDetail extends StatelessWidget {
                 color: Colors.white,
                 boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 5)]),
             //  コンテンツの中身を表示
-            child: mainContent(),
+            child: mainContent(context),
           ),
         )));
   }
 
   // コンテンツの中身
-  Widget mainContent(){
+  Widget mainContent(BuildContext context){
     return Column(
       //  表示するサイズを最小にする
       mainAxisSize: MainAxisSize.min,
@@ -37,6 +39,7 @@ class CouponDetail extends StatelessWidget {
         Image.asset('assets/images/c_img.jpg'),
         mainCenterContent(),
         mainBottomContent(),
+        mainBottomContent2(context),
       ],
     );
   }
@@ -91,4 +94,48 @@ class CouponDetail extends StatelessWidget {
       ),
     );
   }
+
+  Widget mainBottomContent2(BuildContext context){
+    return Padding(
+      padding: EdgeInsets.all(10),
+      child: Center(
+        child: Row(
+          children: [
+            Spacer(flex: 1),
+            Expanded(
+              flex: 2,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Usecouponpage()),
+                  );
+                },
+                child: Padding(
+                  padding: EdgeInsets.all(2),
+                  child: FittedBox(
+                    fit: BoxFit.contain,
+                    child: Text("このクーポンを使う"),
+                  ),
+                ),
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
+                  foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                      side: BorderSide(color: Colors.green),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Spacer(flex: 1),
+          ],
+        ),
+      ),
+    );
+  }
+
 }
