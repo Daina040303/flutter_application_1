@@ -52,3 +52,5 @@ ios/Runner.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
 ios/Runner.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
 macos/Runner/DebugProfile.entitlements
 macos/Runner/Info.plist
+android/app/src/main/res/values/strings.xml
+lib/firebase_options.dart
