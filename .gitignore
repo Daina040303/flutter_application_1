@@ -54,3 +54,4 @@ macos/Runner/DebugProfile.entitlements
 macos/Runner/Info.plist
 android/app/src/main/res/values/strings.xml
 lib/firebase_options.dart
+.env
