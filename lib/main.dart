@@ -26,7 +26,6 @@ void main() async{
 }
 
 class MyApp extends StatelessWidget {
-  //const MyApp({super.key});←マップのやつ
   final AuthService _authService = AuthService();
 
   // This widget is the root of your application.
@@ -118,38 +117,6 @@ class HomePage extends StatelessWidget {
             Navigator.push(context,
             MaterialPageRoute(builder: (_) => GroupListPage()));
           },
-        ),
-      ),
-    );
-  }
-}
-
-//  マップ関連の処理
-class MapSample extends StatefulWidget {
-  @override
-  State<MapSample> createState() => MapSampleState();
-}
-
-class MapSampleState extends State<MapSample> {
-  late GoogleMapController mapController;
-
-  final LatLng _center = const LatLng(35.6812, 139.7671); // 東京駅の座標
-
-  void _onMapCreated(GoogleMapController controller) {
-    mapController = controller;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Google Maps Sample'),
-      ),
-      body: GoogleMap(
-        onMapCreated: _onMapCreated,
-        initialCameraPosition: CameraPosition(
-          target: _center,
-          zoom: 11.0,
         ),
       ),
     );

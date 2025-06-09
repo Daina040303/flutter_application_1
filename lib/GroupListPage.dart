@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/GroupCreatePage.dart';
+import 'package:flutter_application_1/map_page.dart';
 import 'groups_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 
 class GroupListPage extends StatelessWidget {
   final GroupService _service = GroupService();
@@ -21,20 +24,34 @@ class GroupListPage extends StatelessWidget {
         ],
       ),
       body: StreamBuilder(
-        stream: _service.getUserGroups(),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) return CircularProgressIndicator();
-          final docs = snapshot.data!.docs;
-          if (docs.isEmpty) return Text('まだグループがありません');
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, authSnapshot) {
+          if (!authSnapshot.hasData) {
+            return Center(child: Text('ログインが必要です'));
+          }
 
-          return ListView.builder(
-            itemCount: docs.length,
-            itemBuilder: (context, index) {
-              final group = docs[index];
-              return ListTile(
-                title: Text(group['name']),
-                onTap: () {
-                  // 今後、詳細画面に遷移予定
+          return StreamBuilder(
+            stream: _service.getUserGroups(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) return Center(child: CircularProgressIndicator());
+
+              final docs = snapshot.data!.docs;
+              if (docs.isEmpty) return Center(child: Text('まだグループがありません'));
+
+              return ListView.builder(
+                itemCount: docs.length,
+                itemBuilder: (context, index) {
+                  final group = docs[index];
+                  return ListTile(
+                    title: Text(group['name']),
+                    onTap: () {
+                      // 今後、詳細画面に遷移予定
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => MapPage()),
+                      );
+                    },
+                  );
                 },
               );
             },

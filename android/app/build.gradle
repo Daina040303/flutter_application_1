@@ -46,3 +46,5 @@ android {
 flutter {
     source = "../.."
 }
+
+//ここもエラー対策でコメント化apply plugin: 'com.google.gms.google-services'
