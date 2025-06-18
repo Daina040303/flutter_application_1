@@ -41,17 +41,4 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
-firebase.json
-android/app/src/main/AndroidManifest.xml
-android/app/google-services.json
-ios/Runner/AppDelegate.swift
-ios/Runner.xcodeproj/project.pbxproj
-ios/Runner.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
-ios/Runner.xcodeproj/project.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
-ios/Runner.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
-ios/Runner.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
-macos/Runner/DebugProfile.entitlements
-macos/Runner/Info.plist
-android/app/src/main/res/values/strings.xml
-lib/firebase_options.dart
 .env

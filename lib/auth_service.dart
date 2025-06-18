@@ -26,4 +26,18 @@ class AuthService {
   }
 
   Stream<User?> get userChanges => _auth.userChanges();
+
+  /// 現在のユーザーを取得（null 安全）
+  User? get currentUser {
+    try {
+      return _auth.currentUser;
+    } catch (e) {
+      print("currentUserの取得中にエラー: $e");
+      return null;
+    }
+  }
+
+  /// ログイン済みかどうかのチェック
+  bool get isLoggedIn => _auth.currentUser != null;
 }
+

@@ -41,7 +41,7 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'GoogleのAPIキーをここに入力',
+    apiKey: 'AIzaSyDN4HK9emlKyzpEuT7lxoyBkWMJSankQ70',
     appId: '1:1070091804437:web:5f723dbcb021a18964531c',
     messagingSenderId: '1070091804437',
     projectId: 'flutterapplication-22410204',
@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'GoogleのAPIキーをここに入力',
+    apiKey: '',
     appId: '1:1070091804437:android:83750b08a2678cef64531c',
     messagingSenderId: '1070091804437',
     projectId: 'flutterapplication-22410204',
@@ -59,25 +59,29 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'GoogleのAPIキーをここに入力',
+    apiKey: 'AIzaSyBHUORgJRqPImNEDksKnDC_-cW7Svw4k0Y',
     appId: '1:1070091804437:ios:d54525dd11faf2f864531c',
     messagingSenderId: '1070091804437',
     projectId: 'flutterapplication-22410204',
     storageBucket: 'flutterapplication-22410204.firebasestorage.app',
+    androidClientId: '1070091804437-0invm6b49f6pkr8b0idtck50guq5mtm3.apps.googleusercontent.com',
+    iosClientId: '1070091804437-tnes2efo02o1p18813bmkqt23oc4jr15.apps.googleusercontent.com',
     iosBundleId: 'com.example.flutterApplication1',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'GoogleのAPIキーをここに入力',
+    apiKey: 'AIzaSyBHUORgJRqPImNEDksKnDC_-cW7Svw4k0Y',
     appId: '1:1070091804437:ios:d54525dd11faf2f864531c',
     messagingSenderId: '1070091804437',
     projectId: 'flutterapplication-22410204',
     storageBucket: 'flutterapplication-22410204.firebasestorage.app',
+    androidClientId: '1070091804437-0invm6b49f6pkr8b0idtck50guq5mtm3.apps.googleusercontent.com',
+    iosClientId: '1070091804437-tnes2efo02o1p18813bmkqt23oc4jr15.apps.googleusercontent.com',
     iosBundleId: 'com.example.flutterApplication1',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'GoogleのAPIキーをここに入力',
+    apiKey: 'AIzaSyDN4HK9emlKyzpEuT7lxoyBkWMJSankQ70',
     appId: '1:1070091804437:web:2825a2531b54ef0f64531c',
     messagingSenderId: '1070091804437',
     projectId: 'flutterapplication-22410204',
@@ -85,4 +89,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'flutterapplication-22410204.firebasestorage.app',
     measurementId: 'G-32D6BZH03Z',
   );
+
 }
