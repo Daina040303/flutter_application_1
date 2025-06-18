@@ -35,7 +35,8 @@ class GroupListPage extends StatelessWidget {
             builder: (context, snapshot) {
               if (!snapshot.hasData) return Center(child: CircularProgressIndicator());
 
-              final docs = snapshot.data!.docs;
+              //final docs = snapshot.data!.docs;
+              final docs = "グループ名";
               if (docs.isEmpty) return Center(child: Text('まだグループがありません'));
 
               return ListView.builder(
@@ -43,13 +44,14 @@ class GroupListPage extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final group = docs[index];
                   return ListTile(
-                    title: Text(group['name']),
+                    //title: Text(group['name']),
+                    title: Text("グループ名"),
                     onTap: () {
-                      // 今後、詳細画面に遷移予定
+                      /* 今後、詳細画面に遷移予定
                       Navigator.push(
                           context,
                           MaterialPageRoute(builder: (_) => MapPage()),
-                      );
+                      );*/
                     },
                   );
                 },
