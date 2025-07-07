@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/GroupCreatePage.dart';
 import 'package:flutter_application_1/map_page.dart';
 import 'groups_service.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+//import 'package:firebase_auth/firebase_auth.dart';
 
 
 class GroupListPage extends StatelessWidget {
-  final GroupService _service = GroupService();
+  //final GroupService _service = GroupService();
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class GroupListPage extends StatelessWidget {
           )
         ],
       ),
-      body: StreamBuilder(
+      /*body: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, authSnapshot) {
           if (!authSnapshot.hasData) {
@@ -59,7 +59,7 @@ class GroupListPage extends StatelessWidget {
             },
           );
         },
-      ),
+      ),*/
     );
   }
 }

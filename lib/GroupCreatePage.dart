@@ -8,7 +8,7 @@ class GroupCreatePage extends StatefulWidget {
 
 class _GroupCreatePageState extends State<GroupCreatePage> {
   final _controller = TextEditingController();
-  final _service = GroupService();
+  //final _service = GroupService();
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class _GroupCreatePageState extends State<GroupCreatePage> {
             ),
             ElevatedButton(
               onPressed: () async {
-                await _service.createGroup(_controller.text);
+                //await _service.createGroup(_controller.text);
                 Navigator.pop(context); // 前の画面に戻る
               },
               child: Text('作成する'),

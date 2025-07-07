@@ -1,4 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
+/*import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 //サインイン時に必要な認証情報関連のコード
@@ -41,3 +41,4 @@ class AuthService {
   bool get isLoggedIn => _auth.currentUser != null;
 }
 
+*/

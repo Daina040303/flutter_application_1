@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/GroupListPage.dart';
 import 'package:flutter_application_1/map_page.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+//import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_application_1/auth_service.dart';
 import 'firebase_options.dart';
 
 void main() async {
-  /*WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
+  WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  print("Firebaseの初期化完了");*/
+  print("Firebaseの初期化完了");
   runApp(MyApp());
 }
 
@@ -67,7 +67,7 @@ class mapNav extends StatelessWidget{
     );
   }
 }
-
+/*
 class LoginPage extends StatelessWidget {
   final AuthService authService;
   const LoginPage({required this.authService});
@@ -88,8 +88,8 @@ class LoginPage extends StatelessWidget {
 }
 
 class HomePage extends StatelessWidget {
-  final User user;
   final AuthService authService;
+  final User user;
   const HomePage({required this.user, required this.authService});
 
   @override
@@ -118,4 +118,4 @@ class HomePage extends StatelessWidget {
       ),
     );
   }
-}
+}*/

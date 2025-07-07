@@ -129,18 +129,19 @@ class _MapPageState extends State<MapPage> {
 
     // Firestore保存処理（仮）
     FirebaseFirestore.instance.collection('memories').add({
-      'lat': position.latitude,
-      'lng': position.longitude,
-      'title': title,
-      'description': description,
-      'date': date,
-      'createdBy': createdBy,
-      'createdAt': FieldValue.serverTimestamp(),
+      'lat': position.latitude,//ピン座標➀
+      'lng': position.longitude,//ピン座標➁
+      'title': title,//タイトル
+      'description': description,//思い出、コメント
+      'date': date,//思い出の日付
+      'createdBy': createdBy,//ピンの作成者
     }).then((_) {
+      print("Firebaseに保存しました");
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('保存しました')),
       );
     }).catchError((error) {
+      print("Firebaseに保存できませんでした: $error");
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('保存に失敗しました: $error')),
       );
