@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';          // jsonEncode, jsonDecode を使うため
+import 'package:http/http.dart' as http;  // HTTP通信を行うため
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -17,24 +19,30 @@ class _MapPageState extends State<MapPage> {
     zoom: 10,
   );
 
+  void test() async{
+      final response = await http.post(
+      Uri.parse('http://10.0.2.2:5000/test'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({
+        'message': 'Hello Server'
+      }),
+    );
+
+    print('ステータス: ${response.statusCode}');
+    print('レスポンス: ${response.body}');
+
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    test(); // ← ここで呼test()を初回実行
+    _fetchMarkersFromServer(); // ← メモリ取得
+  }
+
   void _onMapCreated(GoogleMapController controller) {
     _mapController = controller;
   }
-
-  /*void _addMarker(LatLng position) {
-    final marker = Marker(
-      markerId: MarkerId(DateTime.now().toString()),
-      position: position,
-      infoWindow: InfoWindow(title: '思い出地点'),//ピンのタイトルを表示
-    );
-
-    setState(() {
-      _markers.add(marker);
-    });
-
-    //Firestoreに保存する処理を追加 保存したい情報（座標(数値),刺した人(文字列),ピンのタイトル(文字列),思い出の日付(文字列)）
-    //ピンを指したい場所を長押し→保存したい情報を入力するモーダルウィンドウを表示→保存の順番
-  }*/
 
   void _showPinInfoDialog(LatLng position) {
     final _titleController = TextEditingController();
@@ -66,7 +74,7 @@ class _MapPageState extends State<MapPage> {
             ),
             TextField(
               controller: _nameController,
-              decoration: InputDecoration(labelText: '名前（投稿者）'),
+              decoration: InputDecoration(labelText: '名前（ピンの作成者）'),
             ),
             SizedBox(height: 10),
             Row(
@@ -116,7 +124,7 @@ class _MapPageState extends State<MapPage> {
     String description,
     String date,
     String createdBy,
-  ) {
+  ) async{
     final marker = Marker(
       markerId: MarkerId(DateTime.now().toString()),
       position: position,
@@ -127,25 +135,55 @@ class _MapPageState extends State<MapPage> {
       _markers.add(marker);
     });
 
-    // Firestore保存処理（仮）
-    FirebaseFirestore.instance.collection('memories').add({
-      'lat': position.latitude,//ピン座標➀
-      'lng': position.longitude,//ピン座標➁
-      'title': title,//タイトル
-      'description': description,//思い出、コメント
-      'date': date,//思い出の日付
-      'createdBy': createdBy,//ピンの作成者
-    }).then((_) {
-      print("Firebaseに保存しました");
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('保存しました')),
+    final response = await http.post(
+      Uri.parse('http://10.0.2.2:5000/api/memories'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({
+        'lat': position.latitude,//ピン座標➀
+        'lng': position.longitude,//ピン座標➁
+        'title': title,//タイトル
+        'description': description,//思い出、コメント
+        'date': date,//思い出の日付
+        'createdBy': createdBy,//ピンの作成者
+      }),
+    );
+
+    if (response.statusCode == 201) {
+      print('保存成功');
+    } else {
+      print('保存失敗: ${response.body}');
+    }
+  }
+
+  Future<void> _fetchMarkersFromServer() async {
+    try {
+      final response = await http.get(
+        Uri.parse('http://10.0.2.2:5000/api/memories'),
       );
-    }).catchError((error) {
-      print("Firebaseに保存できませんでした: $error");
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('保存に失敗しました: $error')),
-      );
-    });
+
+      if (response.statusCode == 200) {
+        final List<dynamic> memories = jsonDecode(response.body);
+
+        setState(() {
+          _markers.clear(); // 一度全削除（必要に応じて）
+          for (var memory in memories) {
+            final marker = Marker(
+              markerId: MarkerId(memory['_id']),
+              position: LatLng(memory['lat'], memory['lng']),
+              infoWindow: InfoWindow(
+                title: memory['title'],
+                snippet: '${memory['description']}\nby ${memory['createdBy']} (${memory['date']})',
+              ),
+            );
+            _markers.add(marker);
+          }
+        });
+      } else {
+        print('ピン取得失敗: ${response.body}');
+      }
+    } catch (e) {
+      print('エラー: $e');
+    }
   }
 
 
