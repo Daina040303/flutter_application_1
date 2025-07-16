@@ -3,7 +3,7 @@ const router = express.Router();
 const Memory = require('../models/memory');
 
 
-// 新規メモリ登録
+// 新規ピンの追加（保存）
 router.post('/', async (req, res) => {
   try {
     console.log("受信したリクエストボディ:", req.body);
@@ -18,7 +18,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// 全メモリ取得
+// ピン情報取得
 router.get('/', async (req, res) => {
   try {
     const memories = await Memory.find();
